@@ -93,6 +93,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -169,18 +170,32 @@
           const option = param.options[optionId];
           console.log('optionId:', optionId, 'option:', option);
 
+          // finding a image with class .paramId-optionId in the image div
+          const imgClass = '.' + paramId + '-' + optionId;
+          const optionImage = thisProduct.imageWrapper.querySelector(imgClass);
+          console.log('optionImage:', optionImage);
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
           // check if there is param with a name of paramId in formData and if it includes optionId
-          if(formData[paramId] && formData[paramId].includes(optionId)) {
+          if(optionSelected) {
             // check if the option is not default
             if(!option.default) {
               // add option price to price variable
               price = price + option.price;
+            }
+            // if image exsist - add class 'active' to image
+            if(optionImage){
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
             }
           } else {
             // check if the option is default
             if(option.default) {
               // reduce price variable
               price = price - option.price;
+            }
+            // if image exsist - remove class 'active' from image
+            if(optionImage){
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
           console.log('current price:', price);
