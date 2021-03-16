@@ -223,6 +223,7 @@
       console.log('constructor arguments:', element);
 
       thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
     }
 
     setValue(value){
@@ -231,6 +232,9 @@
       const newValue = parseInt(value);
 
       /* TODO: Add validation */
+      if(thisWidget.value !== newValue && !isNaN(newValue)) {
+        thisWidget.value = newValue;
+      }
 
       thisWidget.value = newValue;
       thisWidget.input.value = thisWidget.value;
