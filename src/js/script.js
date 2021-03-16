@@ -225,6 +225,17 @@
       thisWidget.getElements(element);
     }
 
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      /* TODO: Add validation */
+
+      thisWidget.value = newValue;
+      thisWidget.input.value = thisWidget.value;
+    }
+
     getElements(element){
       const thisWidget = this;
 
