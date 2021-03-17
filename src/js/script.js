@@ -223,9 +223,8 @@
       console.log('constructor arguments:', element);
 
       thisWidget.getElements(element);
-      thisWidget.initActions();
       thisWidget.setValue(thisWidget.input.value);
-
+      thisWidget.initActions();
     }
 
     setValue(value){
@@ -234,11 +233,13 @@
       const newValue = parseInt(value);
 
       /* TODO: Add validation */
-      if(thisWidget.value !== newValue && !isNaN(newValue)) {
+      if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
       }
 
       thisWidget.input.value = thisWidget.value;
+
+      // console.log('actual value:', thisWidget.input.value);
     }
 
     initActions(){
