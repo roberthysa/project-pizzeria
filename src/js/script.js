@@ -145,7 +145,7 @@
         /* prevent default action for event */
         event.preventDefault();
 
-        thisProduct.element.classList.toggle('active');
+        thisProduct.dom.element.classList.toggle('active');
 
         /* find active product (product that has active class) */
         const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
@@ -153,7 +153,7 @@
         for (let activeProduct of activeProducts) {
 
           /* if there is active product and it's not thisProduct.element, remove class active from it */
-          if (activeProduct !== thisProduct.element){
+          if (activeProduct !== thisProduct.dom.element){
 
             /* toggle active class on thisProduct.element */
             activeProduct.classList.remove('active');
@@ -319,6 +319,26 @@
     }
   }
 
+  class Cart{
+    constructor(element){
+      const thisCart = this;
+
+      thisCart.products = [];
+
+      thisCart.getElements(element);
+
+      console.log('new Cart:', thisCart);
+    }
+
+    getElements(element){
+      const thisCart = this;
+
+      thisCart.dom = {};
+
+      thisCart.dom.wrapper = element;
+    }
+  }
+
   const app = {
     initMenu: function(){
       const thisApp = this;
@@ -338,6 +358,13 @@
       thisApp.data = dataSource;
     },
 
+    initCart: function(){
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+    },
+
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -348,6 +375,7 @@
 
       thisApp.initData();
       thisApp.initMenu();
+      thisApp.initCart();
     },
   };
 
