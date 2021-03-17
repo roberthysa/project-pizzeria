@@ -145,7 +145,7 @@
         /* prevent default action for event */
         event.preventDefault();
 
-        thisProduct.dom.element.classList.toggle('active');
+        thisProduct.element.classList.toggle('active');
 
         /* find active product (product that has active class) */
         const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
@@ -153,7 +153,7 @@
         for (let activeProduct of activeProducts) {
 
           /* if there is active product and it's not thisProduct.element, remove class active from it */
-          if (activeProduct !== thisProduct.dom.element){
+          if (activeProduct !== thisProduct.element){
 
             /* toggle active class on thisProduct.element */
             activeProduct.classList.remove('active');
