@@ -296,9 +296,9 @@
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
 
-        // create category param in params const eg. params = { ingredients: { name: 'Ingredients', options: {}}}
+        // create category param in params const eg. params = { ingredients: { label: 'Ingredients', options: {}}}
         params[paramId] = {
-          name: param.label,
+          label: param.label,
           options: {},
         };
 
@@ -407,7 +407,16 @@
     }
 
     add(menuProduct){
-      // const thisCart = this;
+      const thisCart = this;
+
+      /* generate HTML based on template */
+      const generatedHTML = templates.cartProduct(menuProduct);
+
+      /* create element using utils.createElementFromHTML */
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
+      /* add element to cart */
+      thisCart.dom.productList.appendChild(generatedDOM);
 
       console.log('adding product:', menuProduct);
     }
@@ -418,6 +427,7 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     }
   }
 
