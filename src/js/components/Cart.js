@@ -28,7 +28,7 @@ class Cart{
     });
 
     thisCart.dom.productList.addEventListener('remove', function(event){
-      console.log('caught event remove!');
+      // console.log('caught event remove!');
       thisCart.remove(event.detail.cartProduct);
     });
 
@@ -81,9 +81,9 @@ class Cart{
       thisCart.dom.deliveryFee.innerHTML = 0;
     }
 
-    console.log('totalNumber:', totalNumber);
-    console.log('subtotalprice:', subtotalPrice);
-    console.log('thisCart.totalPrice:', thisCart.totalPrice);
+    // console.log('totalNumber:', totalNumber);
+    // console.log('subtotalprice:', subtotalPrice);
+    // console.log('thisCart.totalPrice:', thisCart.totalPrice);
 
     thisCart.totalNumber = totalNumber;
     thisCart.subTotalPrice = subtotalPrice;
@@ -99,15 +99,15 @@ class Cart{
 
     /* find index of the product in list */
     const indexProduct = thisCart.products.indexOf(removeProduct);
-    console.log('index of removeProduct:', indexProduct);
+    // console.log('index of removeProduct:', indexProduct);
 
     /* remove product from list in HTML */
     thisCart.dom.productList.removeChild(thisCart.dom.productList.childNodes[indexProduct+1]);
 
     /* remove product from list thisCart.products */
-    console.log(thisCart.products);
+    // console.log(thisCart.products);
     thisCart.products.splice(indexProduct, 1);
-    console.log(thisCart.products);
+    // console.log(thisCart.products);
 
     /* update data in cart */
     thisCart.update();
@@ -133,7 +133,7 @@ class Cart{
       payload.products.push(prod.getData());
     }
 
-    console.log('dataOrder:', payload);
+    // console.log('dataOrder:', payload);
 
     const options = {
       method: 'POST',
