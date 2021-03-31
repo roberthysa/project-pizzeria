@@ -8,6 +8,7 @@ class Booking {
   constructor(element) {
     const thisBooking = this;
 
+    thisBooking.selectedTable = '';
     thisBooking.render(element);
     thisBooking.initWidget();
     thisBooking.getData();
@@ -119,6 +120,33 @@ class Booking {
     }
   }
 
+  initTables(event) {
+    const thisBooking = this;
+
+    const clickedElement = event.target;
+    // console.log('clickedElement:', clickedElement);
+
+    const tableClickedId = clickedElement.getAttribute(settings.booking.tableIdAttribute);
+
+    if (clickedElement.classList.contains(classNames.booking.tableBooked)) {
+      alert('Table unavailable');
+    } else {
+      if (clickedElement.classList.contains(classNames.booking.tableSelected)) {
+
+        clickedElement.classList.remove (classNames.booking.tableSelected);
+        thisBooking.selectedTable = '';
+      } else {
+
+        for (let table of thisBooking.dom.tables) {
+          table.classList.remove(classNames.booking.tableSelected);
+          clickedElement.classList.add(classNames.booking.tableSelected);
+        }
+
+        thisBooking.selectedTable = tableClickedId;
+      }
+    }
+  }
+
   updateDOM() {
     const thisBooking = this;
 
@@ -163,6 +191,7 @@ class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.planTables = thisBooking.dom.wrapper.querySelector (select.booking.planTables);
   }
 
   initWidget() {
@@ -173,8 +202,12 @@ class Booking {
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-    thisBooking.dom.wrapper.addEventListener('updated', function () {
+    thisBooking.dom.wrapper.addEventListener('updated', function() {
       thisBooking.updateDOM();
+    });
+
+    thisBooking.dom.planTables.addEventListener('click', function(event) {
+      thisBooking.initTables(event);
     });
   }
 
