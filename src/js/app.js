@@ -24,7 +24,7 @@ const app = {
       }
     }
 
-    console.log('pageMatchingHash:', pageMatchingHash);
+    // console.log('pageMatchingHash:', pageMatchingHash);
 
     thisApp.activatePage(pageMatchingHash);
 
@@ -132,7 +132,7 @@ const app = {
     const thisApp = this;
 
     const homeContainer = document.querySelector(select.containerOf.home);
-    console.log(homeContainer);
+    // console.log(homeContainer);
     thisApp.home = new Home(homeContainer);
   },
 

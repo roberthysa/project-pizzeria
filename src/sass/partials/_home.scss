@@ -15,6 +15,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .home-links {
@@ -22,6 +23,7 @@
   position: relative;
   background-position: center;
   background-size: cover;
+  text-align: center;
 
   img {
     height: 120px;
@@ -40,27 +42,29 @@
 .txt-link {
   position: absolute;
   top: 10%;
-  left: 15%;
+  left: 12%;
 
   h2 {
-    margin-top: 35px;
-  }
-
-  p {
-    margin-top: 25px;
-    display: none;
+    margin: 35px 0;
   }
 }
 
-.txt-link:hover {
+.inside-link {
   h2 {
-    transform: translateY(-10px);
+    transform: translateY(0px);
+    transition: 1s;
+  }
+}
+
+.inside-link:hover {
+  h2 {
+    transform: translateY(-20px);
     transition: 1s;
   }
 
   p {
-    display: flex;
-    transform: translateY(-20px);
+    //display: flex;
+    transform: translateY(-50px);
     transition: 1s;
   }
 }
