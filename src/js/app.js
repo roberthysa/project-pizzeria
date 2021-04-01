@@ -2,6 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Home from './components/Home.js';
 
 const app = {
   initPages: function(){
@@ -9,6 +10,7 @@ const app = {
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.navHomeLinks = document.querySelectorAll(select.nav.homeLinks);
 
     const idFromHash = window.location.hash.replace('#/', '');
     // console.log('idFromHash:', idFromHash);
@@ -24,7 +26,7 @@ const app = {
 
     console.log('pageMatchingHash:', pageMatchingHash);
 
-    thisApp.activatePage(idFromHash);
+    thisApp.activatePage(pageMatchingHash);
 
     for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
@@ -38,6 +40,17 @@ const app = {
         thisApp.activatePage(id);
 
         /* change URL hash */
+        window.location.hash = '#/' + id;
+      });
+    }
+
+    for (let homeLink of thisApp.navHomeLinks) {
+      homeLink.addEventListener('click', function(event) {
+        const clickedElement = this;
+        event.preventDefault();
+
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        thisApp.activatePage(id);
         window.location.hash = '#/' + id;
       });
     }
@@ -115,7 +128,15 @@ const app = {
     });
   },
 
-  initBooking: function () {
+  initHome: function(){
+    const thisApp = this;
+
+    const homeContainer = document.querySelector(select.containerOf.home);
+    console.log(homeContainer);
+    thisApp.home = new Home(homeContainer);
+  },
+
+  initBooking: function() {
     const thisApp = this;
 
     const bookingWidget = document.querySelector(select.containerOf.booking);
@@ -133,6 +154,7 @@ const app = {
     thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initHome();
     thisApp.initBooking();
   },
 };
